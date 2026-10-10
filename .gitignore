@@ -1,0 +1,91 @@
+######################################################################
+# Build Tools
+
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# 前端依赖与构建产物
+node_modules/
+dist/
+.vite/
+turbo/
+*.tsbuildinfo
+
+######################################################################
+# IDE
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### VSCode ###
+.vscode/
+
+### JRebel ###
+rebel.xml
+
+### NetBeans ###
+nbproject/private/
+build/*
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+######################################################################
+# 环境变量与敏感配置（真实值请勿提交，参考 .env.example）
+
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+*.ppk
+
+######################################################################
+# 日志 / 本地数据库 / 上传文件 / 缓存
+
+logs/
+log/
+*.log
+uploadPath/
+profile/
+*.sqlite
+*.sqlite3
+*.db
+*.mdb
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+.cache/
+.temp/
+tmp/
+
+######################################################################
+# Others
+*.xml.versionsBackup
+*.swp
+.DS_Store
+Thumbs.db
+
+!*/build/*.java
+!*/build/*.html
+!*/build/*.xml
