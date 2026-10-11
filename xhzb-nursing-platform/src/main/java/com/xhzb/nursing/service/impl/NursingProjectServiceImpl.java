@@ -1,11 +1,13 @@
 package com.xhzb.nursing.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.xhzb.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.xhzb.nursing.mapper.NursingProjectMapper;
 import com.xhzb.nursing.domain.NursingProject;
+import com.xhzb.nursing.domain.vo.ProjectOptionVo;
 import com.xhzb.nursing.service.INursingProjectService;
 
 /**
@@ -42,6 +44,24 @@ public class NursingProjectServiceImpl implements INursingProjectService
     public List<NursingProject> selectNursingProjectList(NursingProject nursingProject)
     {
         return nursingProjectMapper.selectNursingProjectList(nursingProject);
+    }
+
+    /**
+     * 查询所有护理项目（下拉选项）
+     * 说明：不传查询条件即查询全部护理项目，再在 Service 层组装为 label/value 结构
+     * 
+     * @return 护理项目选项集合
+     */
+    @Override
+    public List<ProjectOptionVo> selectProjectOptions()
+    {
+        List<NursingProject> nursingProjects = nursingProjectMapper.selectNursingProjectList(new NursingProject());
+        List<ProjectOptionVo> options = new ArrayList<>(nursingProjects.size());
+        for (NursingProject nursingProject : nursingProjects)
+        {
+            options.add(new ProjectOptionVo(nursingProject.getName(), String.valueOf(nursingProject.getId())));
+        }
+        return options;
     }
 
     /**

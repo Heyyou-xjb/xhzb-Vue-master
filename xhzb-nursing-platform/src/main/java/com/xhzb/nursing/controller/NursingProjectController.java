@@ -47,6 +47,16 @@ public class NursingProjectController extends BaseController
     }
 
     /**
+     * 查询所有护理项目（下拉选项，返回 label/value 结构）
+     */
+    @PreAuthorize("@ss.hasPermi('nursing:nursing_project:list')")
+    @GetMapping("/all")
+    public AjaxResult all()
+    {
+        return success(nursingProjectService.selectProjectOptions());
+    }
+
+    /**
      * 导出护理项目列表
      */
     @PreAuthorize("@ss.hasPermi('nursing:nursing_project:export')")

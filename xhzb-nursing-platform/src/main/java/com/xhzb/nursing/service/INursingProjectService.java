@@ -2,6 +2,7 @@ package com.xhzb.nursing.service;
 
 import java.util.List;
 import com.xhzb.nursing.domain.NursingProject;
+import com.xhzb.nursing.domain.vo.ProjectOptionVo;
 
 /**
  * 护理项目Service接口
@@ -26,6 +27,13 @@ public interface INursingProjectService
      * @return 护理项目集合
      */
     public List<NursingProject> selectNursingProjectList(NursingProject nursingProject);
+
+    /**
+     * 查询所有护理项目（下拉选项，label 为项目名称，value 为项目id）
+     * 
+     * @return 护理项目选项集合
+     */
+    public List<ProjectOptionVo> selectProjectOptions();
 
     /**
      * 新增护理项目

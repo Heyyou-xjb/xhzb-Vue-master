@@ -17,30 +17,6 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="计划执行时间" prop="executeTime">
-        <el-input
-          v-model="queryParams.executeTime"
-          placeholder="请输入计划执行时间"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="执行周期 0 天 1 周 2月" prop="executeCycle">
-        <el-input
-          v-model="queryParams.executeCycle"
-          placeholder="请输入执行周期 0 天 1 周 2月"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="执行频次" prop="executeFrequency">
-        <el-input
-          v-model="queryParams.executeFrequency"
-          placeholder="请输入执行频次"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
@@ -100,7 +76,6 @@
       <el-table-column label="备注" align="center" prop="remark" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template #default="scope">
-          <el-button link type="primary" icon="View" @click="handleViewData(scope.row)" v-hasPermi="['nursing:project_plan:query']">详情</el-button>
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['nursing:project_plan:edit']">修改</el-button>
           <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['nursing:project_plan:remove']">删除</el-button>
         </template>
@@ -115,8 +90,6 @@
       @pagination="getList"
     />
 
-    <!-- 护理计划和项目关联详情抽屉 -->
-    <project_plan-view-drawer ref="project_planViewRef" />
     <!-- 添加或修改护理计划和项目关联对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
       <el-form ref="project_planRef" :model="form" :rules="rules" label-width="100px">
@@ -165,7 +138,6 @@
 
 <script setup name="Project_plan">
 import { listProject_plan, getProject_plan, delProject_plan, addProject_plan, updateProject_plan } from "@/api/nursing/project_plan"
-import Project_planViewDrawer from "./view"
 
 const { proxy } = getCurrentInstance()
 
@@ -186,9 +158,6 @@ const data = reactive({
     pageSize: 10,
     planId: undefined,
     projectId: undefined,
-    executeTime: undefined,
-    executeCycle: undefined,
-    executeFrequency: undefined,
   },
   rules: {
     planId: [
@@ -315,11 +284,6 @@ function handleDelete(row) {
     getList()
     proxy.$modal.msgSuccess("删除成功")
   }).catch(() => {})
-}
-
-/** 详情按钮操作 */
-function handleViewData(row) {
-  proxy.$refs["project_planViewRef"].open(row.id)
 }
 
 /** 导出按钮操作 */

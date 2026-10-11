@@ -9,29 +9,15 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="护理计划ID" prop="lplanId">
-        <el-input
-          v-model="queryParams.lplanId"
-          placeholder="请输入护理计划ID"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="护理费用" prop="fee">
-        <el-input
-          v-model="queryParams.fee"
-          placeholder="请输入护理费用"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="等级说明" prop="description">
-        <el-input
-          v-model="queryParams.description"
-          placeholder="请输入等级说明"
-          clearable
-          @keyup.enter="handleQuery"
-        />
+      <el-form-item label="状态" prop="status">
+        <el-select v-model="queryParams.status" placeholder="请选择状态" clearable>
+          <el-option
+            v-for="dict in nursing_level_status"
+            :key="dict.value"
+            :label="dict.label"
+            :value="dict.value"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
@@ -87,7 +73,11 @@
       <el-table-column label="等级名称" align="center" prop="name" />
       <el-table-column label="护理计划ID" align="center" prop="lplanId" />
       <el-table-column label="护理费用" align="center" prop="fee" />
-      <el-table-column label="状态" align="center" prop="status" />
+      <el-table-column label="状态" align="center" prop="status">
+        <template #default="scope">
+          <dict-tag :options="nursing_level_status" :value="scope.row.status"/>
+        </template>
+      </el-table-column>
       <el-table-column label="等级说明" align="center" prop="description" />
       <el-table-column label="备注" align="center" prop="remark" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -126,6 +116,18 @@
             </el-form-item>
           </el-col>
           <el-col :span="24">
+            <el-form-item label="状态" prop="status">
+              <el-select v-model="form.status" placeholder="请选择状态">
+                <el-option
+                  v-for="dict in nursing_level_status"
+                  :key="dict.value"
+                  :label="dict.label"
+                  :value="parseInt(dict.value)"
+                ></el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
             <el-form-item label="等级说明" prop="description">
               <el-input v-model="form.description" placeholder="请输入等级说明" />
             </el-form-item>
@@ -151,6 +153,7 @@
 import { listLevel, getLevel, delLevel, addLevel, updateLevel } from "@/api/nursing/level"
 
 const { proxy } = getCurrentInstance()
+const { nursing_level_status } = useDict('nursing_level_status')
 
 const levelList = ref([])
 const open = ref(false)
@@ -168,10 +171,7 @@ const data = reactive({
     pageNum: 1,
     pageSize: 10,
     name: undefined,
-    lplanId: undefined,
-    fee: undefined,
     status: undefined,
-    description: undefined,
   },
   rules: {
     name: [

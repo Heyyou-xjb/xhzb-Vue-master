@@ -9,6 +9,14 @@ export function listProject(query) {
   })
 }
 
+// 查询所有护理项目（下拉选项，返回 label/value 结构）
+export function getProjectAll() {
+  return request({
+    url: '/nursing/nursing_project/all',
+    method: 'get'
+  })
+}
+
 // 查询护理项目详细
 export function getProject(id) {
   return request({
