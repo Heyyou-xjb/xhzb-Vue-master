@@ -1,6 +1,7 @@
 package com.xhzb;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
 
@@ -9,6 +10,7 @@ import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
  *
  * @author ruoyi
  */
+@SpringBootConfiguration
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class RuoYiApplication {
     public static void main(String[] args) {

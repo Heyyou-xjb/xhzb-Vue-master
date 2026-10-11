@@ -1,0 +1,144 @@
+/* 护理计划页面样式（与页面原型保持一致） */
+
+// 搜索区域
+.searchBox {
+  .el-form {
+    .el-form-item {
+      margin-right: 24px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .el-input,
+  .el-date-editor {
+    width: 250px;
+  }
+}
+
+// 新增按钮区域（右对齐）
+.newBtn {
+  text-align: right;
+  justify-content: flex-end;
+  padding-bottom: 12px;
+}
+
+// 操作列按钮配色
+.el-button {
+  &.btn-dl {
+    color: #e34d59;
+    cursor: pointer;
+
+    &:hover {
+      color: #e8707a;
+    }
+
+    &:active,
+    &:visited {
+      color: #cb2633;
+    }
+
+    &.disabled {
+      color: #999999;
+      cursor: not-allowed;
+    }
+  }
+
+  &.font-bt {
+    color: #409eff;
+    cursor: pointer;
+    font-style: normal;
+
+    &:hover,
+    &:active,
+    &:visited {
+      color: #409eff;
+    }
+
+    &.disabled {
+      color: #c0c4cc;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// 护理项目子表（原型为自定义 flex 表格）
+.info {
+  width: 100%;
+}
+
+.family {
+  .tableTop {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 8px;
+  }
+
+  .tableHead {
+    display: flex;
+    background-color: #f3f8f9;
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+    justify-content: center;
+    padding: 0 10px;
+    text-align: center;
+
+    & > div {
+      flex: 1;
+    }
+  }
+
+  .tableBody {
+    height: 300px;
+    overflow-y: auto;
+
+    .tableColumn {
+      display: flex;
+      justify-content: space-around;
+      height: 50px;
+      line-height: 50px;
+      border-bottom: 1px solid #ebeef5;
+
+      .column {
+        flex: 1;
+        text-align: center;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .el-input-number {
+          width: 100%;
+        }
+
+        .el-icon {
+          font-size: 16px;
+          margin: 0 5px;
+          cursor: pointer;
+
+          &.add {
+            color: #409eff;
+          }
+
+          &.delect {
+            color: #c03639;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 弹窗顶部基础信息：一行两项
+.elcolFlex {
+  display: flex !important;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .el-form-item {
+    width: 50%;
+  }
+}
