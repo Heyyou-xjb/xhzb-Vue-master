@@ -47,6 +47,16 @@ public class NursingLevelController extends BaseController
     }
 
     /**
+     * 查询所有护理等级（不分页）
+     */
+    @PreAuthorize("@ss.hasPermi('nursing:level:list')")
+    @GetMapping("/all")
+    public AjaxResult all()
+    {
+        return success(nursingLevelService.selectNursingLevelAll());
+    }
+
+    /**
      * 导出护理等级列表
      */
     @PreAuthorize("@ss.hasPermi('nursing:level:export')")

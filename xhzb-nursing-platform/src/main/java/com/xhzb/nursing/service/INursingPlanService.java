@@ -29,6 +29,13 @@ public interface INursingPlanService
     public List<NursingPlan> selectNursingPlanList(NursingPlan nursingPlan);
 
     /**
+     * 查询所有护理计划（不分页）
+     * 
+     * @return 护理计划集合
+     */
+    public List<NursingPlan> selectNursingPlanAll();
+
+    /**
      * 新增护理计划
      *
      * @param dto 护理计划

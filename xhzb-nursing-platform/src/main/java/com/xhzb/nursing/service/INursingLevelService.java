@@ -28,6 +28,13 @@ public interface INursingLevelService
     public List<NursingLevel> selectNursingLevelList(NursingLevel nursingLevel);
 
     /**
+     * 查询所有护理等级（不分页）
+     * 
+     * @return 护理等级集合
+     */
+    public List<NursingLevel> selectNursingLevelAll();
+
+    /**
      * 新增护理等级
      * 
      * @param nursingLevel 护理等级

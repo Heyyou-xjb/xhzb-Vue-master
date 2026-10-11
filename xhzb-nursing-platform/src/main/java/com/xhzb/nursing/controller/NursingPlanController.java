@@ -25,14 +25,13 @@ import com.xhzb.common.core.page.TableDataInfo;
 
 /**
  * 护理计划Controller
- * 
+ *
  * @author xujingbo
  * @date 2026-10-11
  */
 @RestController
 @RequestMapping("/nursing/plan")
-public class NursingPlanController extends BaseController
-{
+public class NursingPlanController extends BaseController {
     @Autowired
     private INursingPlanService nursingPlanService;
 
@@ -41,11 +40,19 @@ public class NursingPlanController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('nursing:plan:list')")
     @GetMapping("/list")
-    public TableDataInfo list(NursingPlan nursingPlan)
-    {
+    public TableDataInfo list(NursingPlan nursingPlan) {
         startPage();
         List<NursingPlan> list = nursingPlanService.selectNursingPlanList(nursingPlan);
         return getDataTable(list);
+    }
+
+    /**
+     * 查询所有护理计划（不分页）
+     */
+    @PreAuthorize("@ss.hasPermi('nursing:plan:list')")
+    @GetMapping("/all")
+    public AjaxResult all() {
+        return success(nursingPlanService.selectNursingPlanAll());
     }
 
     /**
@@ -54,8 +61,7 @@ public class NursingPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('nursing:plan:export')")
     @Log(title = "护理计划", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, NursingPlan nursingPlan)
-    {
+    public void export(HttpServletResponse response, NursingPlan nursingPlan) {
         List<NursingPlan> list = nursingPlanService.selectNursingPlanList(nursingPlan);
         ExcelUtil<NursingPlan> util = new ExcelUtil<NursingPlan>(NursingPlan.class);
         util.exportExcel(response, list, "护理计划数据");
@@ -66,8 +72,7 @@ public class NursingPlanController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('nursing:plan:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(nursingPlanService.selectNursingPlanById(id));
     }
 
@@ -77,8 +82,7 @@ public class NursingPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('nursing:plan:add')")
     @Log(title = "护理计划", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody NursingPlanDto dto)
-    {
+    public AjaxResult add(@RequestBody NursingPlanDto dto) {
         return toAjax(nursingPlanService.insertNursingPlan(dto));
     }
 
@@ -88,8 +92,7 @@ public class NursingPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('nursing:plan:edit')")
     @Log(title = "护理计划", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody NursingPlanDto dto)
-    {
+    public AjaxResult edit(@RequestBody NursingPlanDto dto) {
         return toAjax(nursingPlanService.updateNursingPlan(dto));
     }
 
@@ -98,9 +101,8 @@ public class NursingPlanController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('nursing:plan:remove')")
     @Log(title = "护理计划", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
-    {
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable Long[] ids) {
         return toAjax(nursingPlanService.deleteNursingPlanByIds(ids));
     }
 }

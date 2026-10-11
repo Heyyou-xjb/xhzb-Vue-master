@@ -45,6 +45,18 @@ public class NursingLevelServiceImpl implements INursingLevelService
     }
 
     /**
+     * 查询所有护理等级（不分页）
+     * 说明：不传查询条件即查询全部护理等级，供下拉/选择使用
+     * 
+     * @return 护理等级集合
+     */
+    @Override
+    public List<NursingLevel> selectNursingLevelAll()
+    {
+        return nursingLevelMapper.selectNursingLevelList(new NursingLevel());
+    }
+
+    /**
      * 新增护理等级
      * 
      * @param nursingLevel 护理等级

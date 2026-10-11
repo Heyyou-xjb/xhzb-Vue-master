@@ -62,6 +62,18 @@ public class NursingPlanServiceImpl implements INursingPlanService
         return nursingPlanMapper.selectNursingPlanList(nursingPlan);
     }
 
+    /**
+     * 查询所有护理计划（不分页）
+     * 说明：不传查询条件即查询全部护理计划，供下拉/选择使用
+     * 
+     * @return 护理计划集合
+     */
+    @Override
+    public List<NursingPlan> selectNursingPlanAll()
+    {
+        return nursingPlanMapper.selectNursingPlanList(new NursingPlan());
+    }
+
 
     /**
      * 新增护理计划

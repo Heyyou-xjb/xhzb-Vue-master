@@ -2,6 +2,7 @@ package com.xhzb.nursing.mapper;
 
 import java.util.List;
 import com.xhzb.nursing.domain.NursingProject;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 护理项目Mapper接口
@@ -9,6 +10,7 @@ import com.xhzb.nursing.domain.NursingProject;
  * @author xujingbo
  * @date 2026-10-10
  */
+@Mapper
 public interface NursingProjectMapper 
 {
     /**
